@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\MatchRepository;
+use App\Http\Requests\MatcheRequest;
 use App\Models\Equipe;
 use App\Models\Joueur;
 use App\Models\Matche;
@@ -75,24 +76,9 @@ class MatchController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(MatcheRequest $request, string $id)
     {
-
-        $request->validate([
-            'equipe1' => 'required',
-            'equipe2' => 'required',
-            'date' => 'required|date',
-            'but1' => 'nullable|integer',
-            'but2' => 'nullable|integer',
-        ]);
-
-        $match = Matche::Find($id);
-        $match->visiteur = $request->equipe2;
-        $match->domicile = $request->equipe1;
-        $match->date = $request->date;
-        $match->but_domicile = $request->but1;
-        $match->but_visiteur = $request->but2;
-        $match->save();
+        $this->repository->update($request,$id);
         return redirect()->route('match.index');
     }
 
