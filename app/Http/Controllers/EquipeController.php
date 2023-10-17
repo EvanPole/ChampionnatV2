@@ -8,6 +8,7 @@ use App\Models\Equipe;
 use App\Models\Joueur;
 use App\Models\Matche;
 use Illuminate\Http\Request;
+use Auth;
 
 class EquipeController extends Controller
 {
