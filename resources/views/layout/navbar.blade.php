@@ -21,7 +21,8 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('championnat.index') }}">Acceuil</a>
+                        <a class="nav-link active" aria-current="page"
+                            href="{{ route('championnat.index') }}">Acceuil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('match.index') }}">Matches</a>
@@ -32,12 +33,42 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('joueur.index') }}">Joueurs</a>
                     </li>
-
                 </ul>
+
             </div>
+            @if (!Auth::check())
+                <a style="margin-right: 6px" class="btn btn-outline-dark btn-sm" href="{{ route('login') }}">Login </a>
+                <a style="margin-right: 6px" class="btn btn-outline-dark btn-sm"
+                    href="{{ route('register') }}">inscription</a>
+            @else
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button style="margin-right: 6px" type="submit" class="btn btn-outline-dark btn-sm">Déconnexion</button>
+            </form>
+
+            @endif
+
+
+            <form action="{{ route('change.language') }}" method="post" id="languageForm">
+                @csrf
+                <select name="language" id="language" class="form-select form-select-sm">
+                    <option value="fr" @if (session('locale') == 'fr') selected @endif>🇫🇷 {{ __('FR') }}
+                    </option>
+                    <option value="en" @if (session('locale') == 'en') selected @endif>🇬🇧 {{ __('EN') }}
+                    </option>
+                </select>
+            </form>
+
+
         </div>
     </nav>
     @yield('content')
+
+    <script>
+        document.getElementById('language').addEventListener('change', function() {
+            document.getElementById('languageForm').submit();
+        });
+    </script>
 </body>
 
 </html>
