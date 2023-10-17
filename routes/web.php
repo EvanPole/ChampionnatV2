@@ -33,19 +33,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('championnat', ChampionnatController::class);
+Route::resource('championnat', ChampionnatController::class)->middleware(['auth', 'verified']);
 
-Route::resource('equipe', EquipeController::class);
+Route::resource('equipe', EquipeController::class)->middleware(['auth', 'verified']);
 
-Route::resource('joueur', JoueurController::class);
+Route::resource('joueur', JoueurController::class)->middleware(['auth', 'verified']);
 
-Route::resource('match', MatchController::class);
+Route::resource('match', MatchController::class)->middleware(['auth', 'verified']);
 
-Route::post('/change-language', [LanguageController::class, 'changeLanguage'])->name('change.language');
+Route::post('/change-language', [LanguageController::class, 'changeLanguage'])->middleware(['auth', 'verified'])->name('change.language');
 
 
 Route::get('/', function () {
-    return redirect('championnat');
+    return redirect('login');
 });
 
 require __DIR__.'/auth.php';
