@@ -31,6 +31,8 @@ DB_PASSWORD=
 
 
 ### commandes Tinker pour les permissions
+## Tinker
+- `artisan tinker`
 
 ## crée les roles
 - `use Silber\Bouncer\Database\Role;`
