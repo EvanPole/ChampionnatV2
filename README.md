@@ -55,4 +55,22 @@ DB_PASSWORD=
 #### ne pas oublier de save :
 - `Bouncer::refresh()`
 
+## tableau des permissions
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Nom du role et la permission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>arbitre</td>
+      <td>match-edit</td>
+    </tr>
+    <tr>
+      <td>administrateur</td>
+      <td>acces</td>
+    </tr>
+  </tbody>
+</table>
 
