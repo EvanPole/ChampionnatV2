@@ -72,5 +72,16 @@
     "You're logged in!": "You're logged in!",
     "Your email address is unverified.": "Your email address is unverified.",
     "FR": "French",
-    "EN": "English"
+    "EN": "English",
+    "nav_1": "Home",
+    "nav_2": "Matches",
+    "nav_3": "Teams",
+    "nav_4": "Players",
+    "T1": "List of Matches",
+    "T2": "List of Teams",
+    "T3": "List of players by team",
+    "sup": "Delete",
+    "info": "Info",
+    "edit": "Edit"
+
 }

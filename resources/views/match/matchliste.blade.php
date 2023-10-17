@@ -1,7 +1,7 @@
 @extends('layout.navbar')
 @section('content')
 
-<h1 class="text-center">matchs</h1>
+<h1 class="text-center">{{ __('T1') }}</h1>
 <div class="table-responsive m-5">
     <table class="table table-striped table-bordered">
         <thead>
@@ -40,9 +40,9 @@
                                 @csrf
                                 @method('DELETE')
                                 <div class="btn-group">
-                                    <input type="submit" class="btn btn-danger delete-user" value="Supprimer">
-                                    <a class="btn btn-primary" href="{{ route('match.show', ['match' => $matchs->id]) }}">Info</a>
-                                    <a class="btn btn-secondary" href="{{ route('match.edit', ['match' => $matchs->id]) }}">Éditer</a>
+                                    <input type="submit" class="btn btn-danger delete-user" value="{{ __('sup') }}">
+                                    <a class="btn btn-primary" href="{{ route('match.show', ['match' => $matchs->id]) }}">{{ __('info') }}</a>
+                                    <a class="btn btn-secondary" href="{{ route('match.edit', ['match' => $matchs->id]) }}">{{ __('edit') }}</a>
                                 </div>
                             </form>
                         </td>

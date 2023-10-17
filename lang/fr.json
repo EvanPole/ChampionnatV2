@@ -72,5 +72,15 @@
     "You're logged in!": "Vous êtes connecté·e !",
     "Your email address is unverified.": "Votre adresse e-mail n'est pas vérifiée.",
     "FR": "Français",
-    "EN": "Anglais"
+    "EN": "Anglais",
+    "nav_1": "Accueil",
+    "nav_2": "Matches",
+    "nav_3": "Équipes",
+    "nav_4": "Joueurs",
+    "T1": "Liste des Matches",
+    "T2": "Liste des équipes",
+    "T3": "Liste des joueurs par équipe",
+    "sup": "Supprimer",
+    "info": "Info",
+    "edit": "Éditer"
 }

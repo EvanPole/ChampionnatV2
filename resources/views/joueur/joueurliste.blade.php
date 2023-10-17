@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1 class="text-center">Liste des joueurs par équipe</h1>
+        <h1 class="text-center">{{ __('T3') }}</h1>
         @if (!empty($eqjoueurs))
             @foreach ($eqjoueurs as $eqjoueur)
                 <div class="card mb-3">
@@ -42,11 +42,11 @@
                                                 @method('DELETE')
                                                 <div class="btn-group">
                                                     <input type="submit" class="btn btn-danger delete-user"
-                                                        value="Supprimer">
+                                                        value="{{ __('sup') }}">
                                                         <a class="btn btn-primary"
-                                                        href="{{ route('joueur.show', ['joueur' => $joueur->id]) }}">Info</a>
+                                                        href="{{ route('joueur.show', ['joueur' => $joueur->id]) }}">{{ __('info') }}</a>
                                                     <a class="btn btn-secondary"
-                                                        href="{{ route('joueur.edit', ['joueur' => $joueur->id]) }}">Éditer</a>
+                                                        href="{{ route('joueur.edit', ['joueur' => $joueur->id]) }}">{{ __('edit') }}</a>
                                                 </div>
                                             </form>
                                         </td>

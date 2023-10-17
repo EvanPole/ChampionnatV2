@@ -22,16 +22,16 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
-                            href="{{ route('championnat.index') }}">Acceuil</a>
+                            href="{{ route('championnat.index') }}">{{ __('nav_1') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('match.index') }}">Matches</a>
+                        <a class="nav-link" href="{{ route('match.index') }}">{{ __('nav_2') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('equipe.index') }}">Équipes</a>
+                        <a class="nav-link" href="{{ route('equipe.index') }}">{{ __('nav_3') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('joueur.index') }}">Joueurs</a>
+                        <a class="nav-link" href="{{ route('joueur.index') }}">{{ __('nav_4') }}</a>
                     </li>
                 </ul>
 

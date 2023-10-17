@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1 class="mb-4 text-center">Modification des informations d'un joueur</h1>
+        <h1 class="mb-4 text-center">{{ __('T3') }}</h1>
 
         <div class="card shadow-lg">
             <div class="card-body">

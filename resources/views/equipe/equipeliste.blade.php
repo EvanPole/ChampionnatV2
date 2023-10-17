@@ -1,7 +1,7 @@
 @extends('layout.navbar')
 @section('content')
     <div class="container mt-5">
-        <h1 class="text-center">Liste des équipes</h1>
+        <h1 class="text-center">{{ __('T2') }}</h1>
         <table class="table table-striped table-bordered">
             <thead>
                 <tr class="bg-primary text-white">
@@ -26,9 +26,9 @@
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <div class="btn-group">
-                                    <input type="submit" class="btn btn-danger delete-user" value="Supprimer">
-                                    <a class="btn btn-primary" href="{{ route('equipe.show', ['equipe' => $equipes->id]) }}">Info</a>
-                                    <a class="btn btn-secondary" href="{{ route('equipe.edit', ['equipe' => $equipes->id]) }}">Éditer</a>
+                                    <input type="submit" class="btn btn-danger delete-user" value="{{ __('sup') }}">
+                                    <a class="btn btn-primary" href="{{ route('equipe.show', ['equipe' => $equipes->id]) }}">{{ __('info') }}</a>
+                                    <a class="btn btn-secondary" href="{{ route('equipe.edit', ['equipe' => $equipes->id]) }}">{{ __('edit') }}</a>
                                 </div>
                             </form>
                         </td>
