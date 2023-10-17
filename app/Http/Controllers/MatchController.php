@@ -32,7 +32,7 @@ class MatchController extends Controller
             $playerCount = Joueur::where('equipe_id', $equipes->id)->count();
             $playerCounts[$equipes->id] = $playerCount;
         }
-        if (Auth::user()->can('acces')) {
+        if (Auth::user()->can('acces') or Auth::user()->can('match-edit')) {
             return view('match.matchliste', compact('equipe', 'match', 'playerCounts'));
         }
         abort(401);
