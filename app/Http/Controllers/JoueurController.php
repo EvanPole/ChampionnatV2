@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\JoueurRepository;
+use App\Http\Requests\JoueurRequest;
 use App\Models\Equipe;
 use App\Models\Joueur;
 use Illuminate\Http\Request;
@@ -55,7 +56,7 @@ class JoueurController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JoueurRequest $request)
     {
         $this->repository->store($request);
 
@@ -84,7 +85,7 @@ class JoueurController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(JoueurRequest $request, string $id)
     {
         $this->repository->update($request, $id);
 

@@ -8,14 +8,6 @@ class JoueurRepository
 {
     public function store($request)
     {
-        $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
-            'email' => 'required|email',
-            'tel' => 'required',
-            'equipe_id' => 'required',
-            'sexe' => 'required|in:0,1',
-        ]);
 
         $joueur = new Joueur();
         $joueur->nom = $request->nom;
@@ -33,14 +25,7 @@ class JoueurRepository
     {
         $joueur = Joueur::find($id);
 
-        $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
-            'email' => 'required|email',
-            'tel' => 'required',
-            'equipe_id' => 'required',
-            'sexe' => 'required|in:0,1',
-        ]);
+
 
         $joueur->nom = $request->nom;
         $joueur->prenom = $request->prenom;

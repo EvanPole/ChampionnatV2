@@ -14,30 +14,22 @@ class EquipeRepository
             return redirect()->route('equipe.index')->with('error', 'Équipe introuvable.');
         }
 
-        $validatedData = $request->validate([
-            'ville' => 'required|string',
-            'categorie' => 'required|string',
-            'championnat' => 'required|string',
-        ]);
 
-        $equipe->ville = $validatedData['ville'];
-        $equipe->categorie = $validatedData['categorie'];
-        $equipe->championnat = $validatedData['championnat'];
+        $equipe->ville = $request['ville'];
+        $equipe->categorie = $request['categorie'];
+        $equipe->championnat = $request['championnat'];
         $equipe->save();
     }
 
     public function store($request)
     {
-        $data = $request->validate([
-            'ville' => 'required|string',
-            'categorie' => 'required|string',
-            'championnat' => 'required|string',
-        ]);
+
 
         $equipe = new Equipe;
-        $equipe->ville = $data['ville'];
-        $equipe->categorie = $data['categorie'];
-        $equipe->championnat = $data['championnat'];
+        $equipe->ville = $request['ville'];
+        $equipe->categorie = $request['categorie'];
+        $equipe->championnat = $request['championnat'];
         $equipe->save();
+
     }
 }

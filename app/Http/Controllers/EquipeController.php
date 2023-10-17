@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\EquipeRepository;
+use App\Http\Requests\EquipeRequest;
 use App\Models\Equipe;
 use App\Models\Joueur;
 use App\Models\Matche;
@@ -74,7 +75,7 @@ class EquipeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EquipeRequest $request)
     {
         $this->repository->store($request);
 
@@ -104,7 +105,7 @@ class EquipeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EquipeRequest $request, string $id)
     {
         $this->repository->update($request, $id);
         return redirect()->route('equipe.index');

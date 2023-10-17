@@ -9,11 +9,6 @@ class MatchRepository
 {
     public function store($request)
     {
-        $request->validate([
-            'equipe1' => 'required',
-            'equipe2' => 'required',
-            'date' => 'required|date',
-        ]);
 
         $match = new Matche();
         $match->visiteur = $request->equipe2;
