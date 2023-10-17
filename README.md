@@ -28,3 +28,17 @@ DB_PASSWORD=
 - `artisan db:seed --class=JoueurSeeder`
 
 - `artisan db:seed --class=MatcheSeeder`
+
+
+### commandes Tinker pour les permissions
+
+## crée les roles
+- `use Silber\Bouncer\Database\Role;`
+- `Role::create(['name' => 'administrateur']);`
+- `Role::create(['name' => 'arbitre']);`
+## Donnée des acces a un utilisateur 
+
+- `use Bouncer;`
+### Ajouter un role a votre utilisateur
+- `$user = User::find(1);`
+- `Bouncer::assign('admin')->to($user);`
