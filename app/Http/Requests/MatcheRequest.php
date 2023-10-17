@@ -22,11 +22,7 @@ class MatcheRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'equipe1' => 'required',
-            'equipe2' => 'required',
-            'date' => 'required|date',
-            'but1' => 'nullable|integer',
-            'but2' => 'nullable|integer',
+
         ];
     }
 }

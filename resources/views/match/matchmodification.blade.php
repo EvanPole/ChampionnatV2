@@ -36,16 +36,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="championnat">Date du match:</label>
-                                <input type="date" class="form-control" value="{{ $match->date }}" name="date" id="date" placeholder="Date">
-                            </div>
-                            <div class="form-group">
-                                <label for="but1">But Visiteur:</label>
-                                <input type="number" name="but1" id="but1" value="{{ $match->but_visiteur }}" class="form-control">
-                            </div>
+                                <input type="date" class="form-control" value="{{ date('Y-m-d', strtotime($match->date)) }}" name="date" id="date" placeholder="Date">
 
-                            <div class="form-group">
-                                <label for="but2">But Domicile:</label>
-                                <input type="number" name="but2" id="but2" value="{{ $match->but_domicile }}" class="form-control">
                             </div>
                             <button class="btn btn-success" type="submit">Enregistrer</button>
                         </form>

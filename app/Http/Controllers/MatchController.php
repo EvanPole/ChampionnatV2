@@ -83,7 +83,11 @@ class MatchController extends Controller
     {
         if (Auth::user()->can('match-edit')) {
             $equipes = Equipe::all();
+            return view('match.matchvalidation', compact('equipes', 'match'));
+        }elseif(Auth::user()->can('acces')){
+            $equipes = Equipe::all();
             return view('match.matchmodification', compact('equipes', 'match'));
+
         }
         abort(401);
     }
@@ -95,6 +99,9 @@ class MatchController extends Controller
     {
         if (Auth::user()->can('acces')) {
             $this->repository->update($request, $id);
+            return redirect()->route('match.index');
+        }elseif (Auth::user()->can('match-edit')) {
+            $this->repository->updatevalidation($request, $id);
             return redirect()->route('match.index');
         }
         abort(401);

@@ -16,6 +16,7 @@
                     @php
                         $equipeDomicile = null;
                         $equipeVisiteur = null;
+                        setlocale(LC_TIME, 'fr_FR.UTF-8');
                     @endphp
                     @foreach ($equipe as $equipes)
                         @if ($matchs->domicile == $equipes->id)
@@ -34,7 +35,7 @@
                         <tr>
                             <td>{{ $equipeDomicile->ville }}</td>
                             <td>{{ $equipeVisiteur->ville }}</td>
-                            <td>{{ $matchs->date }}</td>
+                            <td>{{ strftime('%d %B %Y', strtotime($matchs->date)) }}</td>
                             <td>
                                 <form method="POST" action="{{ route('match.destroy', ['match' => $matchs->id]) }}">
                                     @csrf
@@ -45,6 +46,8 @@
                                                 value="{{ __('sup') }}">
                                             <a class="btn btn-primary"
                                                 href="{{ route('match.show', ['match' => $matchs->id]) }}">{{ __('info') }}</a>
+                                                <a class="btn btn-secondary"
+                                                href="{{ route('match.edit', ['match' => $matchs->id]) }}">{{ __('edit') }}</a>
                                         @endif
                                         @if (Bouncer::can('match-edit'))
                                             <a class="btn btn-secondary"
