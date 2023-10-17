@@ -48,7 +48,7 @@
                                         @endif
                                         @if (Bouncer::can('match-edit'))
                                             <a class="btn btn-secondary"
-                                                href="{{ route('match.edit', ['match' => $matchs->id]) }}">{{ __('resm') }}</a>
+                                                href="{{ route('match.edit', ['match' => $matchs->id]) }}">{{ __('edit') }}</a>
                                         @endif
                                     </div>
                                 </form>
