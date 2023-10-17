@@ -52,6 +52,7 @@ DB_PASSWORD=
 - `$admin = Bouncer::role()->where('name', 'administrateur')->first();`
 - `Bouncer::allow($admin)->to('acces');`
 
-
+#### ne pas oublier de save :
+- `Bouncer::refresh()`
 
 
