@@ -43,7 +43,6 @@ Route::resource('match', MatchController::class)->middleware(['auth', 'verified'
 
 Route::post('/change-language', [LanguageController::class, 'changeLanguage'])->middleware(['auth', 'verified'])->name('change.language');
 
-
 Route::get('/', function () {
     return redirect('login');
 });
