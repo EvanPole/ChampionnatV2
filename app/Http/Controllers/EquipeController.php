@@ -60,8 +60,11 @@ class EquipeController extends Controller
             $playerCount = Joueur::where('equipe_id', $equipes->id)->count();
             $playerCounts[$equipes->id] = $playerCount;
         }
+        if (Auth::user()->can('acces')) {
 
-        return view('equipe.equipeliste', compact('equipe', 'matche', 'playerCounts', 'victoires', 'defaites', 'nul'));
+            return view('equipe.equipeliste', compact('equipe', 'matche', 'playerCounts', 'victoires', 'defaites', 'nul'));
+        }
+        abort(401);
     }
 
     /**
@@ -69,7 +72,11 @@ class EquipeController extends Controller
      */
     public function create()
     {
-        return view('equipe.equipecreate');
+        if (Auth::user()->can('acces')) {
+
+            return view('equipe.equipecreate');
+        }
+        abort(401);
     }
 
     /**
@@ -77,9 +84,12 @@ class EquipeController extends Controller
      */
     public function store(EquipeRequest $request)
     {
-        $this->repository->store($request);
+        if (Auth::user()->can('acces')) {
+            $this->repository->store($request);
 
-        return redirect()->route('equipe.index');
+            return redirect()->route('equipe.index');
+        }
+        abort(401);
     }
 
 
@@ -88,7 +98,10 @@ class EquipeController extends Controller
      */
     public function show(Equipe $equipe)
     {
-        return view('equipe.equipeshow', compact('equipe'));
+        if (Auth::user()->can('acces')) {
+            return view('equipe.equipeshow', compact('equipe'));
+        }
+        abort(401);
     }
 
     /**
@@ -96,10 +109,13 @@ class EquipeController extends Controller
      */
     public function edit(string $id)
     {
-        $equipe = Equipe::Find($id);
-        $player = Joueur::where('equipe_id', $equipe->id)->get();
+        if (Auth::user()->can('acces')) {
+            $equipe = Equipe::Find($id);
+            $player = Joueur::where('equipe_id', $equipe->id)->get();
 
-        return view('equipe.equipemodification', compact('player', 'equipe'));
+            return view('equipe.equipemodification', compact('player', 'equipe'));
+        }
+        abort(401);
     }
 
     /**
@@ -107,8 +123,11 @@ class EquipeController extends Controller
      */
     public function update(EquipeRequest $request, string $id)
     {
-        $this->repository->update($request, $id);
-        return redirect()->route('equipe.index');
+        if (Auth::user()->can('acces')) {
+            $this->repository->update($request, $id);
+            return redirect()->route('equipe.index');
+        }
+        abort(401);
     }
 
 
@@ -117,8 +136,11 @@ class EquipeController extends Controller
      */
     public function destroy(Equipe $equipe)
     {
-        $equipe->delete();
+        if (Auth::user()->can('acces')) {
+            $equipe->delete();
 
-        return redirect()->route('equipe.index');
+            return redirect()->route('equipe.index');
+        }
+        abort(401);
     }
 }

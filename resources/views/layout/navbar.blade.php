@@ -19,21 +19,31 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page"
-                            href="{{ route('championnat.index') }}">{{ __('nav_1') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('match.index') }}">{{ __('nav_2') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('equipe.index') }}">{{ __('nav_3') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('joueur.index') }}">{{ __('nav_4') }}</a>
-                    </li>
-                </ul>
+                @if (Bouncer::can('match-edit'))
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('match.index') }}">{{ __('nav_2') }}</a>
+                        </li>
+                    </ul>
+                @elseif (Bouncer::can('acces'))
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{{ route('championnat.index') }}">{{ __('nav_1') }}</a>
+                        </li>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('match.index') }}">{{ __('nav_2') }}</a>
+                            </li>
+                        </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('equipe.index') }}">{{ __('nav_3') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('joueur.index') }}">{{ __('nav_4') }}</a>
+                        </li>
+                    </ul>
+                @endif
 
             </div>
             @if (!Auth::check())
@@ -41,11 +51,11 @@
                 <a style="margin-right: 6px" class="btn btn-outline-dark btn-sm"
                     href="{{ route('register') }}">inscription</a>
             @else
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button style="margin-right: 6px" type="submit" class="btn btn-outline-dark btn-sm">Déconnexion</button>
-            </form>
-
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button style="margin-right: 6px" type="submit"
+                        class="btn btn-outline-dark btn-sm">Déconnexion</button>
+                </form>
             @endif
 
 

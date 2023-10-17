@@ -8,6 +8,7 @@ use App\Models\Equipe;
 use App\Models\Joueur;
 use App\Models\Matche;
 use Illuminate\Http\Request;
+use Auth;
 
 class MatchController extends Controller
 {
@@ -31,16 +32,22 @@ class MatchController extends Controller
             $playerCount = Joueur::where('equipe_id', $equipes->id)->count();
             $playerCounts[$equipes->id] = $playerCount;
         }
-
-        return view('match.matchliste', compact('equipe', 'match', 'playerCounts'));
+        if (Auth::user()->can('acces')) {
+            return view('match.matchliste', compact('equipe', 'match', 'playerCounts'));
+        }
+        abort(401);
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $equipes = Equipe::all();
-        return view('match.matchcreate', compact('equipes'));
+
+        if (Auth::user()->can('acces')) {
+            $equipes = Equipe::all();
+            return view('match.matchcreate', compact('equipes'));
+        }
+        abort(401);
     }
 
     /**
@@ -48,8 +55,11 @@ class MatchController extends Controller
      */
     public function store(MatcheRequest $request)
     {
-        $this->repository->store($request);
-        return redirect()->route('match.index');
+        if (Auth::user()->can('acces')) {
+            $this->repository->store($request);
+            return redirect()->route('match.index');
+        }
+        abort(401);
     }
 
 
@@ -58,9 +68,12 @@ class MatchController extends Controller
      */
     public function show(Matche $match)
     {
-        $equipe = Equipe::all();
+        if (Auth::user()->can('acces')) {
+            $equipe = Equipe::all();
 
-        return view('match.matchshow', compact('equipe', 'match'));
+            return view('match.matchshow', compact('equipe', 'match'));
+        }
+        abort(401);
     }
 
     /**
@@ -68,9 +81,11 @@ class MatchController extends Controller
      */
     public function edit(Matche $match)
     {
-        $equipes = Equipe::all();
-
-        return view('match.matchmodification', compact('equipes', 'match'));
+        if (Auth::user()->can('match-edit')) {
+            $equipes = Equipe::all();
+            return view('match.matchmodification', compact('equipes', 'match'));
+        }
+        abort(401);
     }
 
     /**
@@ -78,8 +93,11 @@ class MatchController extends Controller
      */
     public function update(MatcheRequest $request, string $id)
     {
-        $this->repository->update($request,$id);
-        return redirect()->route('match.index');
+        if (Auth::user()->can('acces')) {
+            $this->repository->update($request, $id);
+            return redirect()->route('match.index');
+        }
+        abort(401);
     }
 
     /**
@@ -87,7 +105,10 @@ class MatchController extends Controller
      */
     public function destroy(Matche $match)
     {
-        $match->delete();
-        return redirect()->route('match.index');
+        if (Auth::user()->can('acces')) {
+            $match->delete();
+            return redirect()->route('match.index');
+        }
+        abort(401);
     }
 }

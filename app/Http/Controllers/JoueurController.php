@@ -7,6 +7,7 @@ use App\Http\Requests\JoueurRequest;
 use App\Models\Equipe;
 use App\Models\Joueur;
 use Illuminate\Http\Request;
+use Auth;
 
 class JoueurController extends Controller
 {
@@ -33,8 +34,11 @@ class JoueurController extends Controller
                 'joueurs' => $joueursEquipe,
             ];
         }
+        if (Auth::user()->can('acces')) {
 
-        return view('joueur.joueurliste', compact('eqjoueurs'));
+            return view('joueur.joueurliste', compact('eqjoueurs'));
+        }
+        abort(401);
     }
 
 
@@ -46,7 +50,11 @@ class JoueurController extends Controller
     public function create()
     {
         $equipes = Equipe::all();
-        return view('joueur.joueurcreate', compact('equipes'));
+        if (Auth::user()->can('acces')) {
+
+            return view('joueur.joueurcreate', compact('equipes'));
+        }
+        abort(401);
     }
 
 
@@ -58,9 +66,13 @@ class JoueurController extends Controller
      */
     public function store(JoueurRequest $request)
     {
-        $this->repository->store($request);
 
-        return redirect()->route('joueur.index')->with('success', 'Le joueur a été créé avec succès.');
+        if (Auth::user()->can('acces')) {
+            $this->repository->store($request);
+
+            return redirect()->route('joueur.index')->with('success', 'Le joueur a été créé avec succès.');
+        }
+        abort(401);
     }
 
 
@@ -69,7 +81,11 @@ class JoueurController extends Controller
      */
     public function show(Joueur $joueur)
     {
-        return view('joueur.joueurshow', compact('joueur'));
+        if (Auth::user()->can('acces')) {
+
+            return view('joueur.joueurshow', compact('joueur'));
+        }
+        abort(401);
     }
 
     /**
@@ -79,7 +95,11 @@ class JoueurController extends Controller
     {
         $joueur = Joueur::Find($id);
         $equipes = Equipe::all();
-        return view('joueur.joueurmodification', compact('joueur', 'equipes'));
+        if (Auth::user()->can('acces')) {
+
+            return view('joueur.joueurmodification', compact('joueur', 'equipes'));
+        }
+        abort(401);
     }
 
     /**
@@ -87,9 +107,13 @@ class JoueurController extends Controller
      */
     public function update(JoueurRequest $request, string $id)
     {
-        $this->repository->update($request, $id);
+        if (Auth::user()->can('acces')) {
 
-        return redirect()->route('joueur.index');
+            $this->repository->update($request, $id);
+
+            return redirect()->route('joueur.index');
+        }
+        abort(401);
     }
 
 
@@ -99,7 +123,11 @@ class JoueurController extends Controller
      */
     public function destroy(Joueur $joueur)
     {
-        $joueur->delete();
-        return redirect()->route('joueur.index');
+        if (Auth::user()->can('acces')) {
+
+            $joueur->delete();
+            return redirect()->route('joueur.index');
+        }
+        abort(401);
     }
 }

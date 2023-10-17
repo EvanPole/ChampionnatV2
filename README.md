@@ -36,9 +36,22 @@ DB_PASSWORD=
 - `use Silber\Bouncer\Database\Role;`
 - `Role::create(['name' => 'administrateur']);`
 - `Role::create(['name' => 'arbitre']);`
-## Donnée des acces a un utilisateur 
 
-- `use Bouncer;`
 ### Ajouter un role a votre utilisateur
 - `$user = User::find(1);`
-- `Bouncer::assign('admin')->to($user);`
+- `Bouncer::assign('arbitre')->to($user);`
+
+### Ajouter la perm a un role
+- `use Bouncer;`
+
+#### Pour l'arbitre :
+- `$arbitre = Bouncer::role()->where('name', 'arbitre')->first();`
+- `Bouncer::allow($arbitre)->to('match-edit');`
+
+#### Pour un administrateur :
+- `$admin = Bouncer::role()->where('name', 'administrateur')->first();`
+- `Bouncer::allow($admin)->to('acces');`
+
+
+
+
