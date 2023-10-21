@@ -43,7 +43,7 @@ DB_PASSWORD=
 - `$user = User::find(1);`
 - `Bouncer::assign('arbitre')->to($user);`
 
-### Ajouter la perm a un role
+### Ajouter la permission a un role
 - `use Bouncer;`
 
 #### Pour l'arbitre :
@@ -54,7 +54,7 @@ DB_PASSWORD=
 - `$admin = Bouncer::role()->where('name', 'administrateur')->first();`
 - `Bouncer::allow($admin)->to('acces');`
 
-#### ne pas oublier de save :
+#### ne pas oublier de sauvegarder :
 - `Bouncer::refresh()`
 
 ## tableau des permissions
