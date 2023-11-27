@@ -10,7 +10,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="nom">Nom du joueur:</label>
-                        <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom du joueur" required maxlength="50">
+                        <x-inputtext property="nom" placeholder="Nom du joueur" />
                     </div>
                     <div class="form-group">
                         <label for="prenom">Prénom du joueur:</label>

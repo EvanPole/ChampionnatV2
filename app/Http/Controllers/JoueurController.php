@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\JoueurRepository;
 use App\Http\Requests\JoueurRequest;
+use App\Mail\InfoMail;
 use App\Models\Equipe;
 use App\Models\Joueur;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Mail;
 
 class JoueurController extends Controller
 {
@@ -35,7 +37,6 @@ class JoueurController extends Controller
             ];
         }
         if (Auth::user()->can('acces')) {
-
             return view('joueur.joueurliste', compact('eqjoueurs'));
         }
         abort(401);
@@ -96,6 +97,8 @@ class JoueurController extends Controller
         $joueur = Joueur::Find($id);
         $equipes = Equipe::all();
         if (Auth::user()->can('acces')) {
+
+            Mail::to(Auth::user()->email)->send(new InfoMail($joueur));
 
             return view('joueur.joueurmodification', compact('joueur', 'equipes'));
         }
