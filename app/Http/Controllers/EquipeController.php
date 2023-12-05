@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\EquipeRepository;
 use App\Http\Requests\EquipeRequest;
-use App\Mail\InfoMail;
+use App\Mail\EditEmail;
 use App\Models\Equipe;
 use App\Models\Joueur;
 use App\Models\Matche;
@@ -90,7 +90,7 @@ class EquipeController extends Controller
         if (Auth::user()->can('acces')) {
             $this->repository->store($request);
 
-            Mail::to('suireevan@gmail.com')->send(new Joueur($request));
+            Mail::to(Auth::user()->email)->send(new EditEmail($request));
             return redirect()->route('equipe.index');
         }
         abort(401);

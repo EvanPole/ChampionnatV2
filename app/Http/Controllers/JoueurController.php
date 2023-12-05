@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\JoueurRepository;
 use App\Http\Requests\JoueurRequest;
-use App\Mail\InfoMail;
+use App\Mail\EditEmail;
 use App\Models\Equipe;
 use App\Models\Joueur;
 use Illuminate\Http\Request;
@@ -98,7 +98,7 @@ class JoueurController extends Controller
         $equipes = Equipe::all();
         if (Auth::user()->can('acces')) {
 
-            Mail::to(Auth::user()->email)->send(new InfoMail($joueur));
+            Mail::to(Auth::user()->email)->send(new EditEmail($joueur));
 
             return view('joueur.joueurmodification', compact('joueur', 'equipes'));
         }
