@@ -19,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/dashboard', function () {
     return redirect()->route('championnat.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
