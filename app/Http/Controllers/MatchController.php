@@ -35,7 +35,7 @@ class MatchController extends Controller
         if (Auth::user()->can('acces') or Auth::user()->can('match-edit')) {
             return view('match.matchliste', compact('equipe', 'match', 'playerCounts'));
         }
-        abort(401);
+
     }
     /**
      * Show the form for creating a new resource.
@@ -47,7 +47,7 @@ class MatchController extends Controller
             $equipes = Equipe::all();
             return view('match.matchcreate', compact('equipes'));
         }
-        abort(401);
+
     }
 
     /**
@@ -59,7 +59,7 @@ class MatchController extends Controller
             $this->repository->store($request);
             return redirect()->route('match.index');
         }
-        abort(401);
+
     }
 
 
@@ -73,7 +73,7 @@ class MatchController extends Controller
 
             return view('match.matchshow', compact('equipe', 'match'));
         }
-        abort(401);
+
     }
 
     /**
@@ -89,7 +89,7 @@ class MatchController extends Controller
             return view('match.matchmodification', compact('equipes', 'match'));
 
         }
-        abort(401);
+
     }
 
     /**
@@ -104,7 +104,7 @@ class MatchController extends Controller
             $this->repository->updatevalidation($request, $id);
             return redirect()->route('match.index');
         }
-        abort(401);
+
     }
 
     /**
@@ -116,6 +116,6 @@ class MatchController extends Controller
             $match->delete();
             return redirect()->route('match.index');
         }
-        abort(401);
+
     }
 }

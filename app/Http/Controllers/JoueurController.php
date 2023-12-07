@@ -39,7 +39,7 @@ class JoueurController extends Controller
         if (Auth::user()->can('acces')) {
             return view('joueur.joueurliste', compact('eqjoueurs'));
         }
-        abort(401);
+
     }
 
 
@@ -55,7 +55,7 @@ class JoueurController extends Controller
 
             return view('joueur.joueurcreate', compact('equipes'));
         }
-        abort(401);
+
     }
 
 
@@ -73,7 +73,7 @@ class JoueurController extends Controller
 
             return redirect()->route('joueur.index')->with('success', 'Le joueur a été créé avec succès.');
         }
-        abort(401);
+
     }
 
 
@@ -86,7 +86,7 @@ class JoueurController extends Controller
 
             return view('joueur.joueurshow', compact('joueur'));
         }
-        abort(401);
+
     }
 
     /**
@@ -102,7 +102,7 @@ class JoueurController extends Controller
 
             return view('joueur.joueurmodification', compact('joueur', 'equipes'));
         }
-        abort(401);
+
     }
 
     /**
@@ -116,7 +116,7 @@ class JoueurController extends Controller
 
             return redirect()->route('joueur.index');
         }
-        abort(401);
+
     }
 
 
@@ -131,6 +131,6 @@ class JoueurController extends Controller
             $joueur->delete();
             return redirect()->route('joueur.index');
         }
-        abort(401);
+
     }
 }

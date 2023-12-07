@@ -35,39 +35,38 @@ class EquipeController extends Controller
         $defaites = [];
         $nul = [];
 
-        foreach ($equipe as $equipes) {
-            $victoires[$equipes->id] = 0;
-            $defaites[$equipes->id] = 0;
-            $nul[$equipes->id] = 0;
+        if (Auth::user()->can('acces')) {
+            foreach ($equipe as $equipes) {
+                $victoires[$equipes->id] = 0;
+                $defaites[$equipes->id] = 0;
+                $nul[$equipes->id] = 0;
 
-            foreach ($matche as $matches) {
-                if ($matches->domicile == $equipes->id) {
-                    if ($matches->but_domicile > $matches->but_visiteur) {
-                        $victoires[$equipes->id] += 1;
-                    } elseif ($matches->but_domicile < $matches->but_visiteur) {
-                        $defaites[$equipes->id] += 1;
-                    } else {
-                        $nul[$equipes->id] += 1;
-                    }
-                } elseif ($matches->visiteur == $equipes->id) {
-                    if ($matches->but_visiteur > $matches->but_domicile) {
-                        $victoires[$equipes->id] += 1;
-                    } elseif ($matches->but_visiteur < $matches->but_domicile) {
-                        $defaites[$equipes->id] += 1;
-                    } else {
-                        $nul[$equipes->id] += 1;
+                foreach ($matche as $matches) {
+                    if ($matches->domicile == $equipes->id) {
+                        if ($matches->but_domicile > $matches->but_visiteur) {
+                            $victoires[$equipes->id] += 1;
+                        } elseif ($matches->but_domicile < $matches->but_visiteur) {
+                            $defaites[$equipes->id] += 1;
+                        } else {
+                            $nul[$equipes->id] += 1;
+                        }
+                    } elseif ($matches->visiteur == $equipes->id) {
+                        if ($matches->but_visiteur > $matches->but_domicile) {
+                            $victoires[$equipes->id] += 1;
+                        } elseif ($matches->but_visiteur < $matches->but_domicile) {
+                            $defaites[$equipes->id] += 1;
+                        } else {
+                            $nul[$equipes->id] += 1;
+                        }
                     }
                 }
-            }
 
-            $playerCount = Joueur::where('equipe_id', $equipes->id)->count();
-            $playerCounts[$equipes->id] = $playerCount;
-        }
-        if (Auth::user()->can('acces')) {
+                $playerCount = Joueur::where('equipe_id', $equipes->id)->count();
+                $playerCounts[$equipes->id] = $playerCount;
+            }
 
             return view('equipe.equipeliste', compact('equipe', 'matche', 'playerCounts', 'victoires', 'defaites', 'nul'));
         }
-        abort(401);
     }
 
     /**
@@ -79,7 +78,6 @@ class EquipeController extends Controller
 
             return view('equipe.equipecreate');
         }
-        abort(401);
     }
 
     /**
@@ -90,10 +88,9 @@ class EquipeController extends Controller
         if (Auth::user()->can('acces')) {
             $this->repository->store($request);
 
-            Mail::to(Auth::user()->email)->send(new EditEmail($request));
+            // Mail::to(Auth::user()->email)->send(new EditEmail($request));
             return redirect()->route('equipe.index');
         }
-        abort(401);
     }
 
 
@@ -105,7 +102,6 @@ class EquipeController extends Controller
         if (Auth::user()->can('acces')) {
             return view('equipe.equipeshow', compact('equipe'));
         }
-        abort(401);
     }
 
     /**
@@ -119,7 +115,6 @@ class EquipeController extends Controller
 
             return view('equipe.equipemodification', compact('player', 'equipe'));
         }
-        abort(401);
     }
 
     /**
@@ -130,9 +125,7 @@ class EquipeController extends Controller
         if (Auth::user()->can('acces')) {
             $this->repository->update($request, $id);
             return redirect()->route('equipe.index');
-
         }
-        abort(401);
     }
 
 
@@ -146,6 +139,5 @@ class EquipeController extends Controller
 
             return redirect()->route('equipe.index');
         }
-        abort(401);
     }
 }
