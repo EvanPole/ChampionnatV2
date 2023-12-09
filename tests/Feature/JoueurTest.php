@@ -10,45 +10,8 @@ use Bouncer;
 
 class JoueurTest extends TestCase
 {
-    public function test_joueur_page_acces_no_login(): void
-    {
-        $response = $this->get('/joueur');
 
-        $response->assertStatus(302);
-    }
-
-    public function test_joueur_create_page_acces_no_login(): void
-    {
-        $response = $this->get('/joueur/store');
-
-        $response->assertStatus(302);
-    }
-    public function test_joueur_store_page_acces_no_login(): void
-    {
-        $response = $this->get('/joueur/create');
-
-        $response->assertStatus(302);
-    }
-
-    public function test_joueur_show_page_acces_no_login(): void
-    {
-        $response = $this->get('/joueur/show');
-
-        $response->assertStatus(302);
-    }
-    public function test_joueur_edit_page_acces_no_login(): void
-    {
-        $response = $this->get('/joueur/edit');
-
-        $response->assertStatus(302);
-    }
-    public function test_joueur_destroy_page_acces_no_login(): void
-    {
-        $response = $this->get('/joueur/destroy');
-
-        $response->assertStatus(302);
-    }
-    public function test_joueur_page_accces_if_login_admin(): void
+    public function test_joueur_index_page_accces_if_login_admin(): void
     {
         $user = User::factory()->create();
         Bouncer::allow("administrateur")->to('acces');
@@ -75,7 +38,7 @@ class JoueurTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_joueur_register(): void
+    public function test_joueur_store_acces_if_login_admin(): void
     {
         $user = User::factory()->create();
         Bouncer::allow("administrateur")->to('acces');

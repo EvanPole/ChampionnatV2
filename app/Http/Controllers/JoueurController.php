@@ -59,21 +59,17 @@ class JoueurController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(JoueurRequest $request)
     {
-
         if (Auth::user()->can('acces')) {
             $this->repository->store($request);
 
             return redirect()->route('joueur.index')->with('success', 'Le joueur a été créé avec succès.');
         }
-
     }
 
 

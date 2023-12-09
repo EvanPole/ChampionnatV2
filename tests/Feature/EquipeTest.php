@@ -173,7 +173,7 @@ class EquipeTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_equipe_register(): void
+    public function test_equipe_store_page_acces_login(): void
     {
         $user = User::factory()->create();
         Bouncer::allow("administrateur")->to('acces');
