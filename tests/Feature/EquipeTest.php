@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Mail\EditEmail;
 use App\Models\Equipe;
 use App\Models\Joueur;
 use App\Models\Matche;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Bouncer;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class EquipeTest extends TestCase
@@ -175,6 +177,8 @@ class EquipeTest extends TestCase
 
     public function test_equipe_store_page_acces_login(): void
     {
+
+
         $user = User::factory()->create();
         Bouncer::allow("administrateur")->to('acces');
         Bouncer::assign('administrateur')->to($user);
@@ -185,9 +189,7 @@ class EquipeTest extends TestCase
             'categorie' => 'Pro',
             'championnat' => 'L1 ubereat',
         ]);
-
         $response->assertRedirect();
-
     }
 
 

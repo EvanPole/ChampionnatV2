@@ -75,7 +75,6 @@ class EquipeController extends Controller
     public function create()
     {
         if (Auth::user()->can('acces')) {
-
             return view('equipe.equipecreate');
         }
     }
@@ -87,8 +86,6 @@ class EquipeController extends Controller
     {
         if (Auth::user()->can('acces')) {
             $this->repository->store($request);
-
-            // Mail::to(Auth::user()->email)->send(new EditEmail($request));
             return redirect()->route('equipe.index');
         }
     }

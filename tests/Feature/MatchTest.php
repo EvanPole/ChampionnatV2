@@ -51,67 +51,65 @@ class MatchTest extends TestCase
 
 
 
-        // show
-        public function test_match_show_page_acces_login(): void
-        {
+    // show
+    public function test_match_show_page_acces_login(): void
+    {
 
-            $user = User::factory()->create();
-            Bouncer::allow("administrateur")->to('acces');
-            Bouncer::assign('administrateur')->to($user);
-            Bouncer::refresh();
+        $user = User::factory()->create();
+        Bouncer::allow("administrateur")->to('acces');
+        Bouncer::assign('administrateur')->to($user);
+        Bouncer::refresh();
 
-            Equipe::factory()->create();
-            Equipe::factory()->create();
-            $match = Matche::factory()->create();
+        Equipe::factory()->create();
+        Equipe::factory()->create();
+        $match = Matche::factory()->create();
 
-            $response = $this->actingAs($user)->get("/match/".$match->id);
+        $response = $this->actingAs($user)->get("/match/" . $match->id);
 
-            $response->assertOk();
-        }
+        $response->assertOk();
+    }
 
-        // edit
-        public function test_joueur_edit_page_acces_login(): void
-        {
-            $user = User::factory()->create();
-            Bouncer::allow("administrateur")->to('acces');
-            Bouncer::assign('administrateur')->to($user);
-            Bouncer::refresh();
+    // edit
+    public function test_joueur_edit_page_acces_login(): void
+    {
+        $user = User::factory()->create();
+        Bouncer::allow("administrateur")->to('acces');
+        Bouncer::assign('administrateur')->to($user);
+        Bouncer::refresh();
 
-            Equipe::factory()->create();
-            $Match = Matche::factory()->create();
+        Equipe::factory()->create();
+        $Match = Matche::factory()->create();
 
-            $response = $this->actingAs($user)->get("/match/{$Match->id}/edit");
+        $response = $this->actingAs($user)->get("/match/{$Match->id}/edit");
 
-            $response->assertOk();
+        $response->assertOk();
 
-            $user2 = User::factory()->create();
-            Bouncer::allow("arbitre")->to('match-edit');
-            Bouncer::assign('arbitre')->to($user2);
-            Bouncer::refresh();
+        $user2 = User::factory()->create();
+        Bouncer::allow("arbitre")->to('match-edit');
+        Bouncer::assign('arbitre')->to($user2);
+        Bouncer::refresh();
 
-            $response = $this->actingAs($user2)->get("/match/{$Match->id}/edit");
+        $response = $this->actingAs($user2)->get("/match/{$Match->id}/edit");
 
-            $response->assertOk();
+        $response->assertOk();
+    }
 
-        }
+    // destroy
 
-        // destroy
+    public function test_destroy_page_acces_login(): void
+    {
+        $user = User::factory()->create();
+        Bouncer::allow("administrateur")->to('acces');
+        Bouncer::assign('administrateur')->to($user);
+        Bouncer::refresh();
 
-        public function test_destroy_page_acces_login(): void
-        {
-            $user = User::factory()->create();
-            Bouncer::allow("administrateur")->to('acces');
-            Bouncer::assign('administrateur')->to($user);
-            Bouncer::refresh();
+        $match = Matche::factory()->create();
 
-            $match = Matche::factory()->create();
+        $this->assertDatabaseHas('matches', ['id' => $match->id]);
 
-            $this->assertDatabaseHas('matches', ['id' => $match->id]);
-
-            $response = $this
-                ->actingAs($user)
-                ->delete("/equipe/{$match->id}");
-            $response->assertOk();
-
-        }
+        $response = $this
+            ->actingAs($user)
+            ->delete("/match/{$match->id}");
+        $response->assertStatus(302);
+    }
 }

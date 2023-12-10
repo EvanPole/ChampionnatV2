@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\MatchRepository;
 use App\Http\Requests\MatcheRequest;
+use App\Mail\EditEmail;
 use App\Models\Equipe;
 use App\Models\Joueur;
 use App\Models\Matche;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Mail;
+
 
 class MatchController extends Controller
 {
@@ -94,8 +97,12 @@ class MatchController extends Controller
         if (Auth::user()->can('acces')) {
             $this->repository->update($request, $id);
             return redirect()->route('match.index');
+
+            Mail::to(Auth::user()->email)->send(new EditEmail($request));
+
         } elseif (Auth::user()->can('match-edit')) {
             $this->repository->updatevalidation($request, $id);
+            Mail::to(Auth::user()->email)->send(new EditEmail($request));
             return redirect()->route('match.index');
         }
     }
