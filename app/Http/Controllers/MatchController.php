@@ -35,7 +35,6 @@ class MatchController extends Controller
         if (Auth::user()->can('acces') or Auth::user()->can('match-edit')) {
             return view('match.matchliste', compact('equipe', 'match', 'playerCounts'));
         }
-
     }
     /**
      * Show the form for creating a new resource.
@@ -47,7 +46,6 @@ class MatchController extends Controller
             $equipes = Equipe::all();
             return view('match.matchcreate', compact('equipes'));
         }
-
     }
 
     /**
@@ -59,7 +57,6 @@ class MatchController extends Controller
             $this->repository->store($request);
             return redirect()->route('match.index');
         }
-
     }
 
 
@@ -73,7 +70,6 @@ class MatchController extends Controller
 
             return view('match.matchshow', compact('equipe', 'match'));
         }
-
     }
 
     /**
@@ -84,12 +80,10 @@ class MatchController extends Controller
         if (Auth::user()->can('match-edit')) {
             $equipes = Equipe::all();
             return view('match.matchvalidation', compact('equipes', 'match'));
-        }elseif(Auth::user()->can('acces')){
+        } elseif (Auth::user()->can('acces')) {
             $equipes = Equipe::all();
             return view('match.matchmodification', compact('equipes', 'match'));
-
         }
-
     }
 
     /**
@@ -100,11 +94,10 @@ class MatchController extends Controller
         if (Auth::user()->can('acces')) {
             $this->repository->update($request, $id);
             return redirect()->route('match.index');
-        }elseif (Auth::user()->can('match-edit')) {
+        } elseif (Auth::user()->can('match-edit')) {
             $this->repository->updatevalidation($request, $id);
             return redirect()->route('match.index');
         }
-
     }
 
     /**
@@ -116,6 +109,5 @@ class MatchController extends Controller
             $match->delete();
             return redirect()->route('match.index');
         }
-
     }
 }

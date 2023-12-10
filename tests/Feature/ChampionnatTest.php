@@ -19,8 +19,8 @@ class ChampionnatTest extends TestCase
     {
 
         $user = User::factory()->create();
-        Bouncer::allow("acces")->to('acces');
-        Bouncer::assign('acces')->to($user);
+        Bouncer::allow("administrateur")->to('acces');
+        Bouncer::assign('administrateur')->to($user);
         Bouncer::refresh();
 
         $response = $this->actingAs($user)->get('/championnat');
